@@ -2,7 +2,7 @@
 
 import bookController from './controllers/book'
 
-module.exports = [
+export default [
     {
         method: 'GET',
         path: '/books',
