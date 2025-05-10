@@ -1,6 +1,6 @@
 'use strict';
 
-import Book from '../models/Book';
+import Book from '../models/bookModel.js';
 
 export default {
     getAllBooks: async (request, h) => {

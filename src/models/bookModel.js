@@ -1,7 +1,7 @@
 'use strict';
 
 import { nanoid } from 'nanoid';
-import db from '../config/db';
+import db from '../config/db.js';
 
 export default class Book {
     static async findAll() {

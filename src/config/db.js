@@ -1,6 +1,7 @@
 'use strict';
 
 import { Pool } from 'pg';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
@@ -20,3 +21,5 @@ pool.query('SELECT NOW()', (err, res) => {
         console.log('PostgreSQL connected successfully at:', res.rows[0].now);
     }
 });
+
+export default pool;
