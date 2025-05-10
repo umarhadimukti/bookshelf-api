@@ -1,6 +1,9 @@
-import { nanoid } from 'nanoid';
+'use strict';
 
-class Book {
+import { nanoid } from 'nanoid';
+import db from '../config/db';
+
+export default class Book {
     static async findAll() {
         try {
             const query = 'SELECT * FROM books';
