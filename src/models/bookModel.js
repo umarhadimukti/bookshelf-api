@@ -4,43 +4,50 @@ import { nanoid } from 'nanoid';
 import db from '../config/db.js';
 
 export default class Book {
+    
+
     static async findAll({ name, reading, finished }) {
         try {
-            let query = `SELECT id, name, publisher FROM books`;
+            // buat array untuk menyimpan semua kondisi
+            const conditions = [];
+            const params = [];
+            let paramIndex = 1;
 
+            // filter berdasarkan nama
             if (name) {
-                query = `SELECT id, name, publisher FROM books WHERE name ilike '%${name}%'`;
+                conditions.push(`name ILIKE $${paramIndex}`);
+                params.push(`%${name}%`);
+                paramIndex++;
             }
 
-            if (reading) {
-                reading = parseInt(reading);
-                switch (reading) {
-                    case 0:
-                        query = `SELECT id, name, publisher FROM books WHERE reading=false`;
-                        break;
-                    case 1:
-                        query = `SELECT id, name, publisher FROM books WHERE reading=true`;
-                        break;
-                    default:
-                        query = 'SELECT id, name, publisher FROM books';
+            // filter berdasarkan status reading
+            if (reading !== undefined) {
+                const readingValue = parseInt(reading);
+                if (readingValue === 0 || readingValue === 1) {
+                    conditions.push(`reading = $${paramIndex}`);
+                    params.push(readingValue === 1);
+                    paramIndex++;
                 }
             }
 
-            if (finished) {
-                finished = parseInt(finished);
-                switch (finished) {
-                    case 0:
-                        query = `SELECT id, name, publisher FROM books WHERE finished=false`;
-                        break;
-                    case 1:
-                        query = `SELECT id, name, publisher FROM books WHERE finished=true`;
-                        break;
-                    default:
-                        query = 'SELECT id, name, publisher FROM books';
+            // filter berdasarkan status finished
+            if (finished !== undefined) {
+                const finishedValue = parseInt(finished);
+                if (finishedValue === 0 || finishedValue === 1) {
+                    conditions.push(`finished = $${paramIndex}`);
+                    params.push(finishedValue === 1);
+                    paramIndex++;
                 }
             }
 
-            const result = await db.query(query);
+            // menyusun query dengan kondisi WHERE jika ada
+            let query = 'SELECT id, name, publisher FROM books';
+            
+            if (conditions.length > 0) {
+                query += ` WHERE ${conditions.join(' AND ')}`;
+            }
+            
+            const result = await db.query(query, params);
             return result.rows;
         } catch (error) {
             console.error('Terjadi kesalahan:', error);
