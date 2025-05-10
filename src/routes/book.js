@@ -16,12 +16,24 @@ export default [
     {
         method: 'POST',
         path: '/books',
-        handler: bookController.createBook
+        handler: bookController.createBook,
+        options: {
+            payload: {
+                parse: true,
+                allow: ['application/json']
+            }
+        }
     },
     {
         method: 'PUT',
         path: '/books/{id}',
-        handler: bookController.updateBook
+        handler: bookController.updateBook,
+        options: {
+            payload: {
+                parse: true,
+                allow: ['application/json']  
+            }
+        }
     },
     {
         method: 'DELETE',
