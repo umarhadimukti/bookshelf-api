@@ -23,7 +23,7 @@ const init = async () => {
     server.route(bookRoutes);
 
     await server.start();
-    console.log('Server running on %s', server.info.uri);
+    console.log('Server sedang berjalan di', server.info.uri);
 };
 
 process.on('unhandledRejection', (err) => {
