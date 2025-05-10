@@ -6,8 +6,12 @@ import db from '../config/db.js';
 export default class Book {
     static async findAll({ name, reading, finished }) {
         try {
-            console.log(name)
-            const query = 'SELECT id, name, publisher FROM books';
+            let query = `SELECT id, name, publisher FROM books`;
+
+            if (name) {
+                query = `SELECT id, name, publisher FROM books WHERE name ilike '%${name}%'`;
+            }
+
             const result = await db.query(query);
             return result.rows;
         } catch (error) {
