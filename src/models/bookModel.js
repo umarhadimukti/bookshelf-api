@@ -26,6 +26,20 @@ export default class Book {
                 }
             }
 
+            if (finished) {
+                finished = parseInt(finished);
+                switch (finished) {
+                    case 0:
+                        query = `SELECT id, name, publisher FROM books WHERE finished=false`;
+                        break;
+                    case 1:
+                        query = `SELECT id, name, publisher FROM books WHERE finished=true`;
+                        break;
+                    default:
+                        query = 'SELECT id, name, publisher FROM books';
+                }
+            }
+
             const result = await db.query(query);
             return result.rows;
         } catch (error) {
