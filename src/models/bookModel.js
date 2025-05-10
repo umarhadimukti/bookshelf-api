@@ -4,8 +4,9 @@ import { nanoid } from 'nanoid';
 import db from '../config/db.js';
 
 export default class Book {
-    static async findAll() {
+    static async findAll({ name, reading, finished }) {
         try {
+            console.log(name)
             const query = 'SELECT id, name, publisher FROM books';
             const result = await db.query(query);
             return result.rows;

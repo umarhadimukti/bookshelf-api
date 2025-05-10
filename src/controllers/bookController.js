@@ -5,7 +5,10 @@ import Book from '../models/bookModel.js';
 export default {
     getAllBooks: async (request, h) => {
         try {
-            const books = await Book.findAll();
+            // mengambil query params (name, reading, finished)
+            const queryParams = request.query;
+            
+            const books = await Book.findAll(queryParams);
             return h.response({
                 status: 'success',
                 data: {
