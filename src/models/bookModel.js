@@ -40,7 +40,7 @@ export default class Book {
             const query = `
                 INSERT INTO books 
                 (id, name, year, author, summary, publisher, 
-                 page_count, read_page, finished, reading, 
+                 pagecount, readpage, finished, reading, 
                  inserted_at, updated_at) 
                 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) 
                 RETURNING *
@@ -72,7 +72,7 @@ export default class Book {
             const query = `
                 UPDATE books 
                 SET name = $1, year = $2, author = $3, summary = $4, 
-                    publisher = $5, page_count = $6, read_page = $7, 
+                    publisher = $5, pagecount = $6, readpage = $7, 
                     finished = $8, reading = $9, updated_at = $10
                 WHERE id = $11
                 RETURNING *
