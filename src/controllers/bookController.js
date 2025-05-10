@@ -52,7 +52,7 @@ export default {
         try {
             const { name, year, author, summary, publisher, pageCount, readPage, reading } = request.payload;
             
-            // Validasi
+            // validasi apabila nama buku tidak dimasukkan
             if (!name) {
                 return h.response({
                     status: 'fail',
@@ -60,6 +60,7 @@ export default {
                 }).code(400);
             }
 
+            // validasi apabila read page > page count
             if (readPage > pageCount) {
                 return h.response({
                     status: 'fail',
@@ -67,6 +68,7 @@ export default {
                 }).code(400);
             }
 
+            // set finished true apabila pageCount === readPage
             const finished = (pageCount === readPage);
             
             const newBook = await Book.create({
@@ -105,7 +107,7 @@ export default {
                 pageCount, readPage, reading 
             } = request.payload;
 
-            // Validasi
+            // validasi apabila nama buku tidak dimasukkan
             if (!name) {
                 return h.response({
                     status: 'fail',
@@ -113,6 +115,7 @@ export default {
                 }).code(400);
             }
 
+            // validasi apabila readPage > pageCount
             if (readPage > pageCount) {
                 return h.response({
                     status: 'fail',
@@ -122,6 +125,7 @@ export default {
 
             const book = await Book.findById(id);
 
+            // kembalikan respon gagal apabila buku tidak ditemukan berdasarkan id
             if (!book) {
                 return h.response({
                     status: 'fail',
