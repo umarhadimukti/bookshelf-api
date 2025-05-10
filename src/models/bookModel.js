@@ -4,7 +4,6 @@ import { nanoid } from 'nanoid';
 import db from '../config/db.js';
 
 export default class Book {
-    
 
     static async findAll({ name, reading, finished }) {
         try {
@@ -46,7 +45,7 @@ export default class Book {
             if (conditions.length > 0) {
                 query += ` WHERE ${conditions.join(' AND ')}`;
             }
-            
+
             const result = await db.query(query, params);
             return result.rows;
         } catch (error) {
