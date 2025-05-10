@@ -6,7 +6,7 @@ import db from '../config/db.js';
 export default class Book {
     static async findAll() {
         try {
-            const query = 'SELECT * FROM books';
+            const query = 'SELECT id, name, publisher FROM books';
             const result = await db.query(query);
             return result.rows;
         } catch (error) {
