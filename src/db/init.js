@@ -25,12 +25,12 @@ const init = async () => {
         if (checkDb.rowCount === 0) {
             console.log(`creating database: ${process.env.DB_NAME || 'bookshelf'}`);
             await initPool.query(`CREATE DATABASE ${process.env.DB_NAME || 'bookshelf'}`);
-            console.log('database created successfully');
+            console.log('berhasil membuat database.');
         } else {
-            console.log(`database ${process.env.DB_NAME || 'bookshelf'} already exists`);
+            console.log(`database ${process.env.DB_NAME || 'bookshelf'} sudah tersedia.`);
         }
     } catch (err) {
-        console.error('error checking/creating database:', err);
+        console.error('Terjadi kesalahan:', err);
     } finally {
         await initPool.end();
     }
@@ -52,7 +52,7 @@ const init = async () => {
         `);
 
         if (checkTable.rowCount === 0) {
-            console.log('Creating books table');
+            console.log('Membuat tabel books');
             
             await pool.query(`
                 CREATE TABLE books (
@@ -75,14 +75,14 @@ const init = async () => {
             await pool.query('CREATE INDEX idx_books_name ON books(name)');
             await pool.query('CREATE INDEX idx_books_author ON books(author)');
             
-            console.log('Database schema setup completed');
+            console.log('Setup skema database selesai.');
         } else {
-            console.log('Books table already exists');
+            console.log('Tabel book sudah tersedia.');
         }
 
-        console.log('Database initialization completed successfully');
+        console.log('Berhasil menginisialisasi database.');
     } catch (err) {
-        console.error('Error setting up tables:', err);
+        console.error('Terjadi kesalahan:', err);
     } finally {
         await pool.end();
     }
