@@ -16,9 +16,9 @@ const pool = new Pool({
 // tes koneksi
 pool.query('SELECT NOW()', (err, res) => {
     if (err) {
-        console.error('Error connecting to PostgreSQL', err);
+        console.error('Gagal terkoneksi dengan database ❌', err);
     } else {
-        console.log('PostgreSQL connected successfully at:', res.rows[0].now);
+        console.log('Berhasil terkoneksi dengan database ✅');
     }
 });
 

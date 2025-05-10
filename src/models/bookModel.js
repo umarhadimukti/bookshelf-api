@@ -10,7 +10,7 @@ export default class Book {
             const result = await db.query(query);
             return result.rows;
         } catch (error) {
-            console.error('Error fetching books:', error);
+            console.error('Terjadi kesalahan:', error);
             return [];
         }
     }
@@ -21,7 +21,7 @@ export default class Book {
             const result = await db.query(query, [id]);
             return result.rows[0];
         } catch (error) {
-            console.error(`Error fetching book with id ${id}:`, error);
+            console.error(`Terjadi kesalahan:`, error);
             return null;
         }
     }
@@ -55,7 +55,7 @@ export default class Book {
             const result = await db.query(query, values);
             return result.rows[0];
         } catch (error) {
-            console.error('Error creating book:', error);
+            console.error('Terjadi kesalahan:', error);
             throw error;
         }
     }
@@ -86,7 +86,7 @@ export default class Book {
             const result = await db.query(query, values);
             return result.rowCount > 0;
         } catch (error) {
-            console.error(`Error updating book with id ${id}:`, error);
+            console.error(`Terjadi kesalahan:`, error);
             throw error;
         }
     }
@@ -97,7 +97,7 @@ export default class Book {
             const result = await db.query(query, [id]);
             return result.rowCount > 0;
         } catch (error) {
-            console.error(`Error deleting book with id ${id}:`, error);
+            console.error(`Terjadi kesalahan:`, error);
             throw error;
         }
     }
