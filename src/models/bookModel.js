@@ -12,6 +12,20 @@ export default class Book {
                 query = `SELECT id, name, publisher FROM books WHERE name ilike '%${name}%'`;
             }
 
+            if (reading) {
+                reading = parseInt(reading);
+                switch (reading) {
+                    case 0:
+                        query = `SELECT id, name, publisher FROM books WHERE reading=false`;
+                        break;
+                    case 1:
+                        query = `SELECT id, name, publisher FROM books WHERE reading=true`;
+                        break;
+                    default:
+                        query = 'SELECT id, name, publisher FROM books';
+                }
+            }
+
             const result = await db.query(query);
             return result.rows;
         } catch (error) {
