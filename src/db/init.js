@@ -25,9 +25,9 @@ const init = async () => {
         if (checkDb.rowCount === 0) {
             console.log(`creating database: ${process.env.DB_NAME || 'bookshelf'}`);
             await initPool.query(`CREATE DATABASE ${process.env.DB_NAME || 'bookshelf'}`);
-            console.log('berhasil membuat database.');
+            console.log('Berhasil membuat database.');
         } else {
-            console.log(`database ${process.env.DB_NAME || 'bookshelf'} sudah tersedia.`);
+            console.log(`Database ${process.env.DB_NAME || 'bookshelf'} sudah tersedia.`);
         }
     } catch (err) {
         console.error('Terjadi kesalahan:', err);
