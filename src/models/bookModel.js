@@ -60,7 +60,7 @@ export default class Book {
             const result = await db.query(query, [id]);
             return result.rows[0];
         } catch (error) {
-            console.error(`Terjadi kesalahan:`, error);
+            console.error('Terjadi kesalahan:', error);
             return null;
         }
     }
@@ -125,7 +125,7 @@ export default class Book {
             const result = await db.query(query, values);
             return result.rowCount > 0;
         } catch (error) {
-            console.error(`Terjadi kesalahan:`, error);
+            console.error('Terjadi kesalahan:', error);
             throw error;
         }
     }
@@ -136,7 +136,7 @@ export default class Book {
             const result = await db.query(query, [id]);
             return result.rowCount > 0;
         } catch (error) {
-            console.error(`Terjadi kesalahan:`, error);
+            console.error('Terjadi kesalahan:', error);
             throw error;
         }
     }

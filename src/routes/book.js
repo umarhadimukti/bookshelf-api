@@ -1,6 +1,6 @@
 'use strict';
 
-import bookController from "../controllers/bookController.js";
+import bookController from '../controllers/bookController.js';
 
 export default [
     {

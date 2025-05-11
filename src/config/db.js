@@ -14,7 +14,7 @@ const pool = new Pool({
 });
 
 // tes koneksi
-pool.query('SELECT NOW()', (err, res) => {
+pool.query('SELECT NOW()', (err) => {
     if (err) {
         console.error('Gagal terkoneksi dengan database ❌', err);
     } else {
