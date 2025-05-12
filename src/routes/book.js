@@ -17,12 +17,12 @@ export default [
         method: 'POST',
         path: '/books',
         handler: bookController.createBook,
-        options: {
-            payload: {
-                parse: true,
-                allow: ['application/json']
-            }
-        }
+        // options: {
+        //     payload: {
+        //         parse: true,
+        //         allow: ['application/json']
+        //     }
+        // }
     },
     {
         method: 'PUT',
