@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid';
-import books from './books.js';
+import books from '../data/books.js';
 import { HTTP_STATUS, RESPONSE_STATUS } from '../constants/http.js';
 
 export const store = (request, h) => {
@@ -197,7 +197,7 @@ export const update = (request, h) => {
         status: RESPONSE_STATUS.FAIL,
         message: 'Gagal memperbarui buku. Id tidak ditemukan',
     });
-    
+
     response.code(HTTP_STATUS.NOT_FOUND);
 
     return response;

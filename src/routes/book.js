@@ -1,22 +1,22 @@
 'use strict';
 
-import bookController from '../controllers/bookController.js';
+import { index, show, store, update, destroy } from '../controllers/bookController.js';
 
 export default [
     {
         method: 'GET',
         path: '/books',
-        handler: bookController.getAllBooks
+        handler: index
     },
     {
         method: 'GET',
         path: '/books/{id}',
-        handler: bookController.getBookById
+        handler: show
     },
     {
         method: 'POST',
         path: '/books',
-        handler: bookController.createBook,
+        handler: store,
         // options: {
         //     payload: {
         //         parse: true,
@@ -27,7 +27,7 @@ export default [
     {
         method: 'PUT',
         path: '/books/{id}',
-        handler: bookController.updateBook,
+        handler: update,
         options: {
             payload: {
                 parse: true,
@@ -38,6 +38,6 @@ export default [
     {
         method: 'DELETE',
         path: '/books/{id}',
-        handler: bookController.deleteBook
+        handler: destroy
     }
 ];
