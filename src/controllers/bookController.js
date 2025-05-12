@@ -5,7 +5,7 @@ import { HTTP_STATUS, RESPONSE_STATUS } from '../constants/http.js';
 export const store = (request, h) => {
     const { name, year, author, summary, publisher, pageCount, readPage, reading } = request.payload;
 
-    // Validasi: name tidak boleh kosong
+    // validasi nama buku
     if (!name) {
         const response = h.response({
         status: RESPONSE_STATUS.FAIL,
@@ -16,7 +16,7 @@ export const store = (request, h) => {
         return response;
     }
 
-    // Validasi: readPage tidak boleh lebih besar dari pageCount
+    // validasi readPage tidak boleh lebih besar dari pageCount
     if (readPage > pageCount) {
         const response = h.response({
         status: RESPONSE_STATUS.FAIL,
@@ -78,20 +78,20 @@ export const index = (request, h) => {
 
     let filteredBooks = [...books];
 
-    // Filter berdasarkan name (case insensitive)
+    // filter berdasarkan nama buku
     if (name !== undefined) {
         filteredBooks = filteredBooks.filter(
         (book) => book.name.toLowerCase().includes(name.toLowerCase()),
         );
     }
 
-    // Filter berdasarkan reading status
+    // filter berdasarkan reading status
     if (reading !== undefined) {
         const isReading = reading === '1';
         filteredBooks = filteredBooks.filter((book) => book.reading === isReading);
     }
 
-    // Filter berdasarkan finished status
+    // filter berdasarkan finished status
     if (finished !== undefined) {
         const isFinished = finished === '1';
         filteredBooks = filteredBooks.filter((book) => book.finished === isFinished);
@@ -142,7 +142,7 @@ export const update = (request, h) => {
         name, year, author, summary, publisher, pageCount, readPage, reading,
     } = request.payload;
 
-    // Validasi: name tidak boleh kosong
+    // validasi nama buku
     if (!name) {
         const response = h.response({
         status: RESPONSE_STATUS.FAIL,
@@ -153,7 +153,7 @@ export const update = (request, h) => {
         return response;
     }
 
-    // Validasi: readPage tidak boleh lebih besar dari pageCount
+    // validasi readPage tidak boleh lebih besar dari pageCount
     if (readPage > pageCount) {
         const response = h.response({
         status: RESPONSE_STATUS.FAIL,
@@ -197,6 +197,7 @@ export const update = (request, h) => {
         status: RESPONSE_STATUS.FAIL,
         message: 'Gagal memperbarui buku. Id tidak ditemukan',
     });
+    
     response.code(HTTP_STATUS.NOT_FOUND);
 
     return response;
