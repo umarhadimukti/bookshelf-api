@@ -114,7 +114,7 @@ export const index = (request, h) => {
 };
 
 export const show = (request, h) => {
-    const { bookId } = request.params;
+    const { id: bookId } = request.params;
 
     const book = books.find((b) => b.id === bookId);
 
@@ -131,13 +131,14 @@ export const show = (request, h) => {
         status: RESPONSE_STATUS.FAIL,
         message: 'Buku tidak ditemukan',
     });
+
     response.code(HTTP_STATUS.NOT_FOUND);
 
     return response;
 };
 
 export const update = (request, h) => {
-    const { bookId } = request.params;
+    const { id: bookId } = request.params;
     const {
         name, year, author, summary, publisher, pageCount, readPage, reading,
     } = request.payload;
@@ -204,7 +205,7 @@ export const update = (request, h) => {
 };
 
 export const destroy = (request, h) => {
-    const { bookId } = request.params;
+    const { id: bookId } = request.params;
 
     const index = books.findIndex((book) => book.id === bookId);
 
