@@ -1,10 +1,13 @@
 import Hapi from '@hapi/hapi';
 import routes from './routes/book.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const init = async () => {
     const server = Hapi.server({
-        port: 9000,
-        host: 'localhost',
+        port: process.env.PORT || 9000,
+        host: process.env.HOST || 'localhost',
         routes: {
             cors: {
                 origin: ['*'],
