@@ -8,8 +8,8 @@ export const store = (request, h) => {
     // validasi nama buku
     if (!name) {
         const response = h.response({
-        status: RESPONSE_STATUS.FAIL,
-        message: 'Gagal menambahkan buku. Mohon isi nama buku',
+            status: RESPONSE_STATUS.FAIL,
+            message: 'Gagal menambahkan buku. Mohon isi nama buku',
         });
         response.code(HTTP_STATUS.BAD_REQUEST);
 
@@ -19,9 +19,10 @@ export const store = (request, h) => {
     // validasi readPage tidak boleh lebih besar dari pageCount
     if (readPage > pageCount) {
         const response = h.response({
-        status: RESPONSE_STATUS.FAIL,
-        message: 'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount',
+            status: RESPONSE_STATUS.FAIL,
+            message: 'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount',
         });
+
         response.code(HTTP_STATUS.BAD_REQUEST);
 
         return response;
@@ -48,16 +49,18 @@ export const store = (request, h) => {
     };
 
     books.push(newBook);
+
     const isSuccess = books.filter((book) => book.id === id).length > 0;
 
     if (isSuccess) {
         const response = h.response({
-        status: RESPONSE_STATUS.SUCCESS,
-        message: 'Buku berhasil ditambahkan',
-        data: {
-            bookId: id,
-        },
+            status: RESPONSE_STATUS.SUCCESS,
+            message: 'Buku berhasil ditambahkan',
+            data: {
+                bookId: id,
+            },
         });
+
         response.code(HTTP_STATUS.CREATED);
 
         return response;
@@ -81,7 +84,7 @@ export const index = (request, h) => {
     // filter berdasarkan nama buku
     if (name !== undefined) {
         filteredBooks = filteredBooks.filter(
-        (book) => book.name.toLowerCase().includes(name.toLowerCase()),
+            (book) => book.name.toLowerCase().includes(name.toLowerCase()),
         );
     }
 
@@ -100,11 +103,11 @@ export const index = (request, h) => {
     const response = h.response({
         status: RESPONSE_STATUS.SUCCESS,
         data: {
-        books: filteredBooks.map((book) => ({
-            id: book.id,
-            name: book.name,
-            publisher: book.publisher,
-        })),
+            books: filteredBooks.map((book) => ({
+                id: book.id,
+                name: book.name,
+                publisher: book.publisher,
+            })),
         },
     });
 
@@ -120,10 +123,10 @@ export const show = (request, h) => {
 
     if (book !== undefined) {
         return {
-        status: RESPONSE_STATUS.SUCCESS,
-        data: {
-            book,
-        },
+            status: RESPONSE_STATUS.SUCCESS,
+            data: {
+                book,
+            },
         };
     }
 
@@ -139,16 +142,15 @@ export const show = (request, h) => {
 
 export const update = (request, h) => {
     const { id: bookId } = request.params;
-    const {
-        name, year, author, summary, publisher, pageCount, readPage, reading,
-    } = request.payload;
+    const { name, year, author, summary, publisher, pageCount, readPage, reading } = request.payload;
 
     // validasi nama buku
     if (!name) {
         const response = h.response({
-        status: RESPONSE_STATUS.FAIL,
-        message: 'Gagal memperbarui buku. Mohon isi nama buku',
+            status: RESPONSE_STATUS.FAIL,
+            message: 'Gagal memperbarui buku. Mohon isi nama buku',
         });
+
         response.code(HTTP_STATUS.BAD_REQUEST);
 
         return response;
@@ -157,9 +159,10 @@ export const update = (request, h) => {
     // validasi readPage tidak boleh lebih besar dari pageCount
     if (readPage > pageCount) {
         const response = h.response({
-        status: RESPONSE_STATUS.FAIL,
-        message: 'Gagal memperbarui buku. readPage tidak boleh lebih besar dari pageCount',
+            status: RESPONSE_STATUS.FAIL,
+            message: 'Gagal memperbarui buku. readPage tidak boleh lebih besar dari pageCount',
         });
+
         response.code(HTTP_STATUS.BAD_REQUEST);
 
         return response;
@@ -172,23 +175,24 @@ export const update = (request, h) => {
         const finished = pageCount === readPage;
 
         books[index] = {
-        ...books[index],
-        name,
-        year,
-        author,
-        summary,
-        publisher,
-        pageCount,
-        readPage,
-        reading,
-        finished,
-        updatedAt,
+            ...books[index],
+            name,
+            year,
+            author,
+            summary,
+            publisher,
+            pageCount,
+            readPage,
+            reading,
+            finished,
+            updatedAt,
         };
 
         const response = h.response({
-        status: RESPONSE_STATUS.SUCCESS,
-        message: 'Buku berhasil diperbarui',
+            status: RESPONSE_STATUS.SUCCESS,
+            message: 'Buku berhasil diperbarui',
         });
+
         response.code(HTTP_STATUS.OK);
 
         return response;
@@ -212,8 +216,8 @@ export const destroy = (request, h) => {
     if (index !== -1) {
         books.splice(index, 1);
         const response = h.response({
-        status: 'success',
-        message: 'Buku berhasil dihapus',
+            status: 'success',
+            message: 'Buku berhasil dihapus',
         });
         response.code(200);
         return response;
@@ -227,4 +231,4 @@ export const destroy = (request, h) => {
     response.code(404);
 
     return response;
-}
+};
