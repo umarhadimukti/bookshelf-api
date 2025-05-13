@@ -16,13 +16,7 @@ export default [
     {
         method: 'POST',
         path: '/books',
-        handler: store,
-        // options: {
-        //     payload: {
-        //         parse: true,
-        //         allow: ['application/json']
-        //     }
-        // }
+        handler: store
     },
     {
         method: 'PUT',
